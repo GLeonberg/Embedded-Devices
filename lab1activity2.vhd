@@ -35,6 +35,7 @@ begin
 			when "1101" => HEX0 <= "1011110"; -- d
 			when "1110" => HEX0 <= "1111001"; -- E
 			when "1111" => HEX0 <= "1110001"; -- F
+			when others => HEX0 <= "0000000"; -- null
 
 		end case;
 		
