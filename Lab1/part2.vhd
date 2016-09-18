@@ -2,10 +2,10 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
--- Combine 7seg and decoder into 1 entity
+-- Decodes 4 bit input into hex, drives it across all hex displays on board
 entity part2 is
 
-port  ( SW: in std_logic_vector(3 downto 0);
+port  ( SW: in std_logic_vector(3 downto 0); -- 4 switches as binary input to decode
         HEX0: out std_logic_vector(6 downto 0);
 	HEX1: out std_logic_vector(6 downto 0);
 	HEX2: out std_logic_vector(6 downto 0);
@@ -18,7 +18,7 @@ port  ( SW: in std_logic_vector(3 downto 0);
 end part2;
 
 architecture decode of part2 is
-signal hex : std_logic_vector(6 downto 0);
+signal hex : std_logic_vector(6 downto 0); -- intermediate signal
 begin
 
 	process (SW, hex) is
@@ -46,6 +46,9 @@ begin
 
 		end case;
 
+		-- Drive signal to hex displays
+		-- negate signal because displays light on 0, not 1
+		
 		HEX0 <= not hex;
 		HEX1 <= not hex;
 		HEX2 <= not hex;
