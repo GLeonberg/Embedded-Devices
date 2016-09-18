@@ -1,2 +1,2 @@
 # Embedded-Devices
-Files for Embedded Devices class (edited)
+Files for Embedded Devices class.
