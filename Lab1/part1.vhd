@@ -8,6 +8,18 @@ use ieee.std_logic_1164.all;
 -- where X and Y are inputs from SW(1) and SW(2)
 -- and Z is an LEDR output light
 
+----------------
+-- | X | Y | Z |
+----------------
+-- | 0 | 0 | 1 |
+----------------
+-- | 0 | 1 | 0 |
+----------------
+-- | 1 | 0 | 1 |
+----------------
+-- | 1 | 1 | 1 |
+----------------
+
 entity part1 is
 
 	port (SW: in std_logic_vector(17 downto 0); -- Switches as input
