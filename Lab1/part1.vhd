@@ -6,7 +6,7 @@ use ieee.std_logic_1164.all;
 
 -- Z = !( !(X or !Y) and (!x and y) )
 -- where X and Y are inputs from SW(1) and SW(2)
--- and Z is an LEDR output light
+-- and Z is an LEDR output light LEDR(0)
 
 ----------------
 -- | X | Y | Z |
@@ -22,8 +22,8 @@ use ieee.std_logic_1164.all;
 
 entity part1 is
 
-	port (SW: in std_logic_vector(17 downto 0); -- Switches as input
-	      LEDR: out std_logic_vector(17 downto 0) ); -- red LEDs as output
+	port (SW: in std_logic_vector(2 downto 1); -- Switches as input
+	      LEDR: out std_logic_vector(0 downto 0) ); -- red LEDs as output
 			
 end part1;
 
