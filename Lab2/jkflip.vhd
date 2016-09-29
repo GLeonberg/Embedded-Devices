@@ -4,27 +4,31 @@ use ieee.std_logic_1164.all;
 
 entity jkflip is
 
-port (j, k, clk : in std_logic;
-	q, qbar : out std_logic);
+	port (j, k, clk : in std_logic;
+		    q, qbar : out std_logic);
 
 end jkflip;
 
 architecture behavioral of jkflip is
-signal qout, qbarout : std_logic := '0';
+	signal qout : std_logic := '0';
+	signal qbarout: std_logic := '1';
 begin
 
-qout <=	'1' when j = '1' and k = '0' and clk = '1'else
-	'0' when j = '0' and k = '1' and clk = '1' else
-	not qout when j = '1' and k = '1' and clk = '1'
-	else '0';
+	process(clk) is begin
 
-qbarout <=      '0' when j = '1' and k = '0' and clk = '1'else
-		'1' when j = '0' and k = '1' and clk = '1'else
-		not qbarout when j = '1' and k = '1' and clk = '1'
-		else '0';
+		if rising_edge(clk) then
 
-q <= qout;
-qbar <= qbarout;
+			if j = '1' and k = '0' then qout <=	'1';
+			elsif j = '0' and k = '1' then qout <= '0';
+			elsif j = '1' and k = '1' then qout <= not qout;
+			else qout <= qout;
+			end if;
 	
+		end if;
+
+		q <= qout;
+		qbar <= not qout;
+
+	end process;
 
 end behavioral;
