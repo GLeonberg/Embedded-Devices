@@ -55,7 +55,6 @@ begin
 				when others => Bs <= "XXXX"; -- Null (unused state)	
 						
 			end case;
-	
 	end process;
-
+				
 end structural;
