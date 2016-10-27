@@ -225,24 +225,28 @@ begin
 								if ((Aint + Bint + Cnint) < 16) then
 									assert Fint = Aint + Bint + Cnint
 									report "Error with F in A plus B when A = "
-									& integer'image(Aint) & ", B = " & integer'image(Bint) & ", Cn = " & integer'image(Cnint) & ", F = " & integer'image(Fint)
+									& integer'image(Aint) & ", B = " & integer'image(Bint) & ", Cn = " & integer'image(Cnint) & 
+									", F = " & integer'image(Fint)
 									severity error;
 								else
 									assert Fint = ((Aint + Bint + Cnint) - 16)
 									report "Error with F in A plus B when A = "
-									& integer'image(Aint) & ", B = " & integer'image(Bint) & ", Cn = " & integer'image(Cnint) & ", F = " & integer'image(Fint)
+									& integer'image(Aint) & ", B = " & integer'image(Bint) & ", Cn = " & integer'image(Cnint) & 
+									", F = " & integer'image(Fint)
 									severity error;
 								end if;
 
 								if Aint + Bint + Cnint > 15 then
 									assert Cn4int /= 0
 									report "Error with Cn4 in A plus B when A = "
-									& integer'image(Aint) & ", B = " & integer'image(Bint) & ", Cn = " & integer'image(Cnint) & ", Cn4 = " & integer'image(Cn4int)
+									& integer'image(Aint) & ", B = " & integer'image(Bint) & ", Cn = " & integer'image(Cnint) & 
+									", Cn4 = " & integer'image(Cn4int)
 									severity error;
 								else
 									assert Cn4int = 0
 									report "Error with Cn4 in A plus B when A = "
-									& integer'image(Aint) & ", B = " & integer'image(Bint) & ", Cn = " & integer'image(Cnint) & ", Cn4 = " & integer'image(Cn4int)
+									& integer'image(Aint) & ", B = " & integer'image(Bint) & ", Cn = " & integer'image(Cnint) & 
+									", Cn4 = " & integer'image(Cn4int)
 									severity error;
 								end if;
 
@@ -252,7 +256,8 @@ begin
 							when "100" =>
 								assert F = (A xor B)
 								report "Error with F in A xor B when A = "
-								& integer'image(Aint) & ", B = " & integer'image(Bint) & ", Cn = " & integer'image(Cnint) & ", F = " & integer'image(Fint)
+								& integer'image(Aint) & ", B = " & integer'image(Bint) & ", Cn = " & integer'image(Cnint) & 
+									", F = " & integer'image(Fint)
 								severity error;
 
 							----------------------------------------------------------
@@ -261,7 +266,8 @@ begin
 							when "101" =>
 								assert F = (A or B)
 								report "Error with F in A or B when A = "
-								& integer'image(Aint) & ", B = " & integer'image(Bint) & ", Cn = " & integer'image(Cnint) & ", F = " & integer'image(Fint)
+								& integer'image(Aint) & ", B = " & integer'image(Bint) & ", Cn = " & integer'image(Cnint) & 
+									", F = " & integer'image(Fint)
 								severity error;
 		
 							----------------------------------------------------------
@@ -270,7 +276,8 @@ begin
 							when "110" =>
 								assert F = (A and B)
 								report "Error with F in A and B when A = "
-								& integer'image(Aint) & ", B = " & integer'image(Bint) & ", Cn = " & integer'image(Cnint) & ", F = " & integer'image(Fint)
+								& integer'image(Aint) & ", B = " & integer'image(Bint) & ", Cn = " & integer'image(Cnint) & 
+									", F = " & integer'image(Fint)
 								severity error;
 
 							----------------------------------------------------------
@@ -279,12 +286,14 @@ begin
 							when "111" =>
 								assert F = "1111"
 								report "Error with F in Preset High when A = "
-								& integer'image(Aint) & ", B = " & integer'image(Bint) & ", Cn = " & integer'image(Cnint) & ", F = " & integer'image(Fint)
+								& integer'image(Aint) & ", B = " & integer'image(Bint) & ", Cn = " & integer'image(Cnint) & 
+									", F = " & integer'image(Fint)
 								severity error;
 
 								assert Cn4 = '1'
 								report "Error with Cn4 in Preset High when A = "
-								& integer'image(Aint) & ", B = " & integer'image(Bint) & ", Cn = " & integer'image(Cnint) & ", Cn4 = " & integer'image(Cn4int)
+								& integer'image(Aint) & ", B = " & integer'image(Bint) & ", Cn = " & integer'image(Cnint) & 
+									", Cn4 = " & integer'image(Cn4int)
 								severity error;
 
 							----------------------------------------------------------
