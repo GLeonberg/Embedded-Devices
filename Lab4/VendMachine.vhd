@@ -21,9 +21,9 @@ ENTITY Machine IS
 END Machine;
 
 architecture arch of Machine is
-   TYPE STATE_TYPE IS (IDLE, SEL, VND);
+	TYPE STATE_TYPE IS (IDLE, SEL, VND);
 	signal quarters, dollars : std_logic_vector(5 downto 0) := "000000";
-   SIGNAL state   : STATE_TYPE := IDLE;
+	SIGNAL state   : STATE_TYPE := IDLE;
 	signal reset : std_logic := '0';
 	
 BEGIN
@@ -53,62 +53,64 @@ BEGIN
 	end process;
 	
 	-- Transition to next state synchronously
-   PROCESS (KEY(0), KEY(1))
-   BEGIN
+	PROCESS (KEY(0), KEY(1))
+	BEGIN
 	
 	
-      IF KEY(1) = '0' THEN
+		IF KEY(1) = '0' THEN
 			reset <= '1';
-         state <= IDLE;
+			state <= IDLE;
 			
-      ELSIF (rising_edge(KEY(0))) THEN
+		ELSIF (rising_edge(KEY(0))) THEN
 		reset <= '0';
-         CASE state IS
+		
+			CASE state IS
 			
-            WHEN IDLE =>
+				WHEN IDLE =>
 					reset <= '1';
-               IF SW = "1111000000000000" or SW = "0000111100000000" or
-						SW = "0000000011110000" or SW = "0000000000001111" THEN
-                  state <= SEL;
-               ELSE
-                  state <= IDLE;
-               END IF;
+				
+					IF SW = "1111000000000000" or SW = "0000111100000000" or
+					SW = "0000000011110000" or SW = "0000000000001111" THEN
+						state <= SEL;
+					ELSE
+						state <= IDLE;
+					END IF;
 					
-            WHEN SEL =>
+			WHEN SEL =>
 				
 					-- invalid product, go back to idle
 					if not(SW = "1111000000000000" or
-							 SW = "0000111100000000" or
-							 SW = "0000000011110000" or
-							 SW = "0000000000001111") then
-							 state <= IDLE;
+							SW = "0000111100000000" or
+							SW = "0000000011110000" or
+							SW = "0000000000001111") then
+								state <= IDLE;
 							
 					-- valid product, check if enough money has been input
-               elsif (("0100"*dollars+quarters) > 3 and SW = "1111000000000000") or
-						(("0100"*dollars+quarters) > 2 and SW = "0000111100000000") or
-						(("0100"*dollars+quarters) > 1 and SW = "0000000011110000") or
-						(("0100"*dollars+quarters) > 0 and SW = "0000000000001111") THEN
-						
-                  state <= VND;
+					elsif (("0100"*dollars+quarters) > 3 and SW = "1111000000000000") or
+							(("0100"*dollars+quarters) > 2 and SW = "0000111100000000") or
+							(("0100"*dollars+quarters) > 1 and SW = "0000000011110000") or
+							(("0100"*dollars+quarters) > 0 and SW = "0000000000001111") THEN
+								state <= VND;
 					else
 						state <= SEL;
-               end if;
+					end if;
 					
-            WHEN VND =>
-                  state <= IDLE;
+			WHEN VND =>
+				state <= IDLE;
 					
-         END CASE;
+			END CASE;
 			
-      END IF;
+		END IF;
 		
-   END PROCESS;
-   
+	END PROCESS;
+
 	-- Perform actions for state asynchronously
-   PROCESS (state, quarters, dollars)
-   BEGIN
-      CASE state IS
+	PROCESS (state, quarters, dollars)
+	BEGIN
+
+		CASE state IS
 		
-         WHEN IDLE =>
+			WHEN IDLE =>
 				HEX0 <= "0111111";
 				HEX1 <= "0111111";
 				HEX2 <= "0111111";
@@ -119,9 +121,9 @@ BEGIN
 				HEX7 <= "0111111";
 				LEDG <= "001";
 				LEDR <= "000000000000000000";
- 
-         WHEN SEL =>
-            LEDR <= "000000000000000000";
+
+			WHEN SEL =>
+				LEDR <= "000000000000000000";
 				HEX2 <= "1111111";
 				HEX3 <= "1111111";
 				HEX6 <= "1111111";
@@ -180,8 +182,8 @@ BEGIN
 				
 				
 				
-         WHEN others =>
-            HEX0 <= "1111111";
+			WHEN others =>
+				HEX0 <= "1111111";
 				HEX1 <= "1111111";
 				HEX2 <= "1111111";
 				HEX3 <= "1111111";
@@ -192,7 +194,8 @@ BEGIN
 				LEDG <= "100";
 				LEDR <= "111111111111111111";
 				
-      END CASE;
-   END PROCESS;
-   
+		END CASE;
+		
+	END PROCESS;
+
 END arch;
