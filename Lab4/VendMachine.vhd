@@ -57,7 +57,7 @@ BEGIN
 	BEGIN
 	
 	
-		IF KEY(1) = '0' THEN
+		IF KEY(1) = '1' THEN
 			reset <= '1';
 			state <= IDLE;
 			
